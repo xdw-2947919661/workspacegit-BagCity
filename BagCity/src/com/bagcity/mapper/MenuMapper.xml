@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bagcity.dao.MenuDao">
+	<resultMap id="baseResultMap" type="com.bagctiy.vo.Menu">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="level" column="level" />
+		<result property="companyId" column="exclu_companyid" />
+		<result property="isUsing" column="is_using" />
+		<result property="icon" column="icon"/>
+	</resultMap>
+
+	<sql id="baseSql">
+		menu.id,
+		menu.name,
+		menu.level,
+		menu.is_using,
+		menu.exclu_companyid,
+		menu.icon
+	</sql>
+
+	<select id="findAll" parameterType="java.lang.String" resultMap="baseResultMap" resultType="com.bagctiy.vo.Menu">
+		SELECT
+		<include refid="baseSql" />
+		FROM sys_menu menu
+		WHERE menu.is_using=1
+		AND menu.exclu_companyid in(#{id},"public") 
+	</select>
+	
+
+</mapper>

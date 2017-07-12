@@ -1,0 +1,46 @@
+/*--²Ëµ¥css--*/
+.bg{
+	background-color: #F0F0F0;
+}
+
+.menudiv{
+	padding-left: 0px;
+	padding-top: 60px;
+}
+
+.menu-left{
+	border-right: 1px solid #CCD8F2;
+	min-height:500px;
+	height: auto;
+}
+.menu-left div:hover{
+	background:-moz-linear-gradient(top, #F0F0F0, rgba(55,118, 255, 0.3));  /*»ðºü*/
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#F0F0F0), to(rgba(55,118, 255, 0.3)));/*¹È¸è*/  
+    background:-o-linear-gradient(top, #F0F0F0, rgba(55,118, 255, 0.3)); /*opera*/
+}
+.menu-content{
+	border-bottom: 1px solid #CCD8F2;
+	height: 50px;
+	text-align: center;
+	line-height: 50px;
+}
+.menu-contbg{
+	background:-moz-linear-gradient(top, #F0F0F0, rgba(55,118, 255, 0.3));  /*»ðºü*/
+    background:-webkit-gradient(linear, 0 0, 0 bottom, from(#F0F0F0), to(rgba(55,118, 255, 0.3)));/*¹È¸è*/  
+    background:-o-linear-gradient(top, #F0F0F0, rgba(55,118, 255, 0.3)); /*opera*/
+}
+/*--²Ëµ¥css--*/
+
+/*--ÄÚÈÝcss--*/
+
+.padRight5{
+	padding-right: 5px;
+}
+.padRight10{
+	padding-right: 10px;
+}
+.content-input{
+	height:30px;
+	border-radius:2px;
+}
+/*--ÄÚÈÝcss--*/

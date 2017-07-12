@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bagcity.dao.UserDao">
+	<resultMap id="baseResultMap" type="com.bagctiy.vo.User">
+		<result property="id" column="id" />
+		<result property="userName" column="user_name" />
+		<result property="password" column="password" />
+		<result property="companyId" column="companyid" />
+		<result property="iconUrl" column="icon_url" />
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<sql id="baseSql">
+		user.id,
+		user.user_name,
+		user.password,
+		user.companyid,
+		user.icon_url,
+		user.create_time,
+		user.update_time
+	</sql>
+
+	<select id="find" parameterType="com.bagctiy.vo.User" resultMap="baseResultMap" resultType="com.bagctiy.vo.User">
+		SELECT
+		<include refid="baseSql" />
+		FROM sys_user user
+		WHERE user.user_name=#{userName}
+		AND user.password=#{password}
+		AND user.companyid=#{companyId}
+	</select>
+	
+	
+	<insert id="add" parameterType="java.util.Date">
+	INSERT into test (id) VALUES (#{i})
+	
+	</insert>
+
+</mapper>

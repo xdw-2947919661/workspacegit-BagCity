@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
+	<!--配置数据源属性文件 -->
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:config/db.properties</value>
+		</property>
+	</bean>
+	<!--配置数据源 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="initialSize" value="5" /><!--初始化连接。 -->
+		<property name="driverClassName" value="${driver}" />
+		<property name="url" value="${url}" />
+		<property name="username" value="${username}" />
+		<property name="password" value="${password}" />
+		<property name="maxActive" value="100" /><!--连接池的最大数据库连接数。设为0表示无限制。 -->
+		<property name="maxIdle" value="50" /><!--maxIdle是最大的空闲连接数，表示即使没有数据库连接时依然可以保持空闲的连接，而不被清除，随时处于待命状态。 -->
+		<property name="maxWait" value="10000" /><!--最大建立连接等待时间。如果超过此时间将接到异常 -->
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<!--property name="defaultAutoCommit"> <value>true</value> </property -->
+	</bean>
+	<!-- 将mybatis中的sqlsession交给spring管理 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!-- 自动扫描mapping.xml文件. -->
+		<!-- base模块 -->
+		<property name="mapperLocations" value="classpath:com/bagcity/mapper/*.xml" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 只需指定dao接口即可,由mybatis自动生成接口代理 ,不需要dao实现 -->
+	<!-- base模块dao接口 -->
+	<bean id="MapperScannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.bagcity.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+	</bean>
+	<!-- 支持上传文件 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+		<property name="defaultEncoding" value="UTF-8"></property>
+	</bean>
+	<!-- 注解方式配置事务 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 开启注解式声明 -->
+	<tx:annotation-driven transaction-manager="transactionManager"
+		proxy-target-class="true" />
+
+	<!-- 自动扫描注解，把Controller和ControllerAdvice交给springmvc处理 -->
+	<context:component-scan base-package="com.bagcity">
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.web.bind.annotation.ControllerAdvice" />
+	</context:component-scan>
+	<!-- 自动装配注解 -->
+	<context:annotation-config />
+	<!-- 注解方式配置AOP -->
+	<aop:aspectj-autoproxy proxy-target-class="true" />
+</beans>

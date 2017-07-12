@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bagcity.dao.StaffDao">
+	<resultMap id="baseResultMap" type="com.bagctiy.vo.Staff">
+		<result property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="password" column="password" />
+		<result property="companyId" column="companyid" />
+		<result property="telphone" column="telphone" />
+		<result property="spareTel" column="spare_tel" />
+		<result property="address" column="address" />
+		<result property="entryTime" column="entry_time" />
+		<result property="createUserId" column="create_user_id"/>
+		<result property="updateUserId" column="update_user_id"/>
+		<result property="createTime" column="create_time" />
+		<result property="updateTime" column="update_time" />
+	</resultMap>
+
+	<sql id="baseSql">
+		staff.id,
+		staff.name,
+		staff.password,
+		staff.companyid,
+		staff.telphone,
+		staff.spare_tel,
+		staff.address,
+		staff.entry_time,
+		staff.create_user_id,
+		staff.update_user_id,
+		staff.create_time,
+		staff.update_time
+	</sql>
+
+	<select id="findAll" parameterType="java.lang.String" resultType="com.bagctiy.vo.Staff" resultMap="baseResultMap" >
+		SELECT
+		<include refid="baseSql" />
+		FROM custom_staff staff
+		WHERE staff.companyid=#{companyId}
+	</select>
+
+
+</mapper>
