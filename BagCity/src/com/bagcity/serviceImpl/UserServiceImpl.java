@@ -59,4 +59,10 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public User save(User var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

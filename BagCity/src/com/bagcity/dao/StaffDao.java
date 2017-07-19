@@ -11,4 +11,8 @@ public interface StaffDao {
 
 	List<Staff> findAll(String companyId);
 
+	void save(Staff staff);
+
+	Staff findById(String id, String companyId);
+
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.bagcity.dao.StaffDao;
 import com.bagcity.service.StaffService;
+import com.bagcity.util.IdUtil;
 import com.bagcity.util.SessionManger;
 import com.bagctiy.vo.Staff;
 
@@ -23,15 +24,25 @@ public class StaffServiceImpl implements StaffService {
 	}
 
 	@Override
-	public Staff findById(String var1) {
-		// TODO Auto-generated method stub
-		return null;
+	public Staff findById(String id) {
+		Staff staff=staffDao.findById(id,SessionManger.sessionUser.getCompanyId());
+		return staff;
 	}
 
 	@Override
 	public List<Staff> findAll() {
 		List<Staff> staffs= staffDao.findAll(SessionManger.sessionUser.getCompanyId());
 		return staffs;
+	}
+
+	@Override
+	public Staff save(Staff staff) {
+		staff.setCompanyId(SessionManger.sessionUser.getCompanyId());
+		staff.setId(IdUtil.createId());
+		staff.setPassword("123");
+		staff.setCreateUserId(SessionManger.sessionUser.getId());
+		staffDao.save(staff);
+		return staff;
 	}
 
 }

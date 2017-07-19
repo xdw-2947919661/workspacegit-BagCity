@@ -10,8 +10,8 @@
 		<result property="spareTel" column="spare_tel" />
 		<result property="address" column="address" />
 		<result property="entryTime" column="entry_time" />
-		<result property="createUserId" column="create_user_id"/>
-		<result property="updateUserId" column="update_user_id"/>
+		<result property="createUserId" column="create_user_id" />
+		<result property="updateUserId" column="update_user_id" />
 		<result property="createTime" column="create_time" />
 		<result property="updateTime" column="update_time" />
 	</resultMap>
@@ -31,12 +31,51 @@
 		staff.update_time
 	</sql>
 
-	<select id="findAll" parameterType="java.lang.String" resultType="com.bagctiy.vo.Staff" resultMap="baseResultMap" >
+	<select id="findAll" parameterType="java.lang.String"
+		resultType="com.bagctiy.vo.Staff" resultMap="baseResultMap">
 		SELECT
 		<include refid="baseSql" />
 		FROM custom_staff staff
 		WHERE staff.companyid=#{companyId}
 	</select>
 
+    <select id="findById" parameterType="java.lang.String" resultMap="baseResultMap">
+    SELECT
+    <include refid="baseSql"/>
+    FROM custom_staff staff
+    WHERE
+    staff.companyid=#{1}
+    AND staff.id=#{0}
+    </select>
+
+	<insert id="save" useGeneratedKeys="true" keyProperty="id" parameterType="com.bagctiy.vo.Staff">
+       INSERT INTO custom_staff (
+        id,
+        name,
+        password,
+        companyid,
+        telphone,
+        spare_tel,
+        address,
+        entry_time,
+        create_user_id,
+        create_time,
+        update_time
+        )
+        VALUES (
+        #{id},
+        #{name},
+        #{password},
+        #{companyId},
+        #{telphone},
+        #{spareTel},
+        #{address},
+        #{entryTime},
+        #{createUserId},
+        NOW(),
+        NOW()
+        )
+
+	</insert>
 
 </mapper>

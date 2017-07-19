@@ -12,6 +12,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8;">
 <script type="text/javascript" src="<%=basePath%>js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/bootstrap.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/jquery-ui.min.js"></script>
 <script type="text/javascript" src="<%=basePath%>js/head.js"></script>
 <link rel="stylesheet" href="<%=basePath%>css/jquery-ui.min.css">
 <link rel="stylesheet" href="<%=basePath%>css/bootstrap.min.css">
