@@ -45,4 +45,9 @@ public class StaffServiceImpl implements StaffService {
 		return staff;
 	}
 
+	@Override
+	public void delete(String id) {
+		staffDao.delete(id);
+	}
+
 }

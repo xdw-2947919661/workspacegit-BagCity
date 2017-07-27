@@ -78,4 +78,7 @@
 
 	</insert>
 
+   <delete id="delete" parameterType="java.lang.String">
+   DELETE FROM custom_staff  where id=#{id}; 
+   </delete>
 </mapper>

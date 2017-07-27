@@ -65,4 +65,10 @@ public class UserServiceImpl implements UserService{
 		return null;
 	}
 
+	@Override
+	public void delete(String var1) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

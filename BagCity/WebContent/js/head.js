@@ -73,7 +73,7 @@ $(function(){
 		$("#nav-add").removeClass("disnone");
 		$("#nav-add").addClass("disinline");
 		$("#nav-add input").val("");
-		
+		$("#nav-text").text("新增员工");
 	});
 	
 	//保存员工信息操作
@@ -185,7 +185,6 @@ function getStaffList(){
 
 //修改员工信息
 function modifStaff(id){
-	alert(id);
 	var dateValue = {"id" : id};
 	$.ajax({
 		type : "POST",
@@ -194,16 +193,17 @@ function modifStaff(id){
 		contentType : "application/json",
 		data :"",
 		success : function(data) {	
-			alert(data);
 				$("#nav-list").removeClass("disinline");
 				$("#nav-list").addClass("disnone");
 				$("#nav-add").removeClass("disnone");
 				$("#nav-add").addClass("disinline");
-				var name=$("#staffName").val(data.name);
-				var telphone=$("#telphone").val(data.telphone);
-				var spareTel=$("#spareTel").val(data.spareTel);
-				var address=$("#address").val(data.address);
-				var entryTime=$("#datepicker").val(data.entryTime);
+				$("#nav-text").text("编辑员工信息");
+				$("#staffId").val(data.id);
+				$("#staffName").val(data.name);
+				$("#telphone").val(data.telphone);
+				$("#spareTel").val(data.spareTel);
+				$("#address").val(data.address);
+				$("#datepicker").val(data.entryTime);
 		},
 		error : {
 
@@ -213,7 +213,23 @@ function modifStaff(id){
 	
 }
 
+//删除员工
 
+function deleteStaff(id){
+	$.ajax({
+		type : "DELETE",
+		url : "staff/delete/"+id,
+		dataType : "json",
+		contentType : "application/json",
+		data :"",
+		success : function(data) {	
+				
+		},
+		error : {
+
+		}
+	});
+}
 
 
 

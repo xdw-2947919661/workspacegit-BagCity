@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,6 @@ import com.bagctiy.vo.staff.response.StaffResponse;
 public class StaffController extends BaseController {
 	@Autowired
 	private StaffService staffService;
-
 	@RequestMapping(value = "/findall", method = RequestMethod.POST, produces = APPLICATION_JSON, consumes = APPLICATION_JSON)
 	public ResponseEntity<List<StaffResponse>> findAll(HttpServletRequest request) {
 		List<Staff> staffList = staffService.findAll();
@@ -55,7 +55,11 @@ public class StaffController extends BaseController {
 		return new ResponseEntity<>(response,HttpStatus.OK);
 	}
 	
-	
+	@RequestMapping(value="/delete/{id}",produces=APPLICATION_JSON,method=RequestMethod.DELETE)
+	public ResponseEntity<Void> deleteById(@PathVariable(value="id") final String id){
+		staffService.delete(id);
+		return new ResponseEntity<>(HttpStatus.OK);
+	}
 	
 	
 	@RequestMapping(value = "/add",consumes=APPLICATION_JSON,produces=APPLICATION_JSON, method = RequestMethod.POST)
@@ -69,4 +73,6 @@ public class StaffController extends BaseController {
 		}
 		return new ResponseEntity<>(map,HttpStatus.OK);
 	}
+	
+	
 }

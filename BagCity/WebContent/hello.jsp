@@ -39,11 +39,11 @@
 				
 				<div class="col-md-12 disnone padnone" id="nav-add" style="height: auto;">
 				<div class="col-md-12 text-left padTop20">
-				<span class="glyphicon glyphicon-chevron-left btn-lg padnone padright5 nav-span" id="chevron"></span>添加新员工
+				<span class="glyphicon glyphicon-chevron-left btn-lg padnone padright5 nav-span" id="chevron"></span><span id="nav-text">添加新员工</span>
 				</div>
 				<div class="col-md-12 padnone"
 					style="border-bottom: 1px solid #CCD8F2; margin-top: 3px;"></div>
-					
+				<input type="text" id="staffId" style="display: none;">
 				<div  class="col-md-12">
 				<div class="col-md-2 text-right padTop20"><span class="redstar">*</span> <span>姓名：</span></div>
 				<div class="col-md-6 padTop20">

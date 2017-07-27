@@ -15,4 +15,6 @@ public interface StaffDao {
 
 	Staff findById(String id, String companyId);
 
+	void delete(String id);
+
 }
